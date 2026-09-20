@@ -1,7 +1,8 @@
 ---
 name: cook-county-data-portal
 description: This skill should be used when the user asks to "query Cook County data", "find Cook County datasets", "get property assessments", "download parcel data", "search datacatalog.cookcountyil.gov", "get medical examiner data", "find court cases", "query State's Attorney data", or mentions Cook County government data (assessor, treasurer, courts, payroll, medical examiner, etc.).
-version: 1.1.0
+metadata:
+  version: "1.1.0"
 ---
 
 # Cook County Data Portal Skill

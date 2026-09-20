@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-09-20
+
+### Added
+
+- **bluesky-bot**: Source/event architecture, reliable delivery, design iteration, profile/account setup, state-preserving deployment, and a procedural SVG/PNG avatar generator.
+- `AGENTS.md` contributor instructions and automated validation using the Agent Skills reference implementation.
+
+### Changed
+
+- Renamed the repository to **ai-plugins** and adopted the open Agent Skills format as the shared distribution contract.
+- Updated all skill installation guides to the cross-agent installer and documented manual installation.
+- Moved skill versions into the standard `metadata` mapping.
+- Made the published Bluesky skill independent of a particular assistant, browser product, or private session archive.
+
+### Removed
+
+- Previous vendor-specific marketplace manifests and install commands. Existing marketplace installations must migrate to the documented skill installation flow.
+
 ## [1.0.6] - 2026-01-25
 
 ### Changed
@@ -67,11 +85,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Plugin Marketplace Support**: Repository can now be added as a Claude Code plugin marketplace
-  - `.claude-plugin/marketplace.json` manifest with all plugins listed
-  - Individual `plugin.json` files for each skill
-  - Installation via `/plugin marketplace add MisterClean/claude-plugins`
-  - Install plugins with `/plugin install <plugin-name>@misterclean-plugins`
+- **Historical marketplace packaging**: Added a harness-specific marketplace and individual manifests. This packaging is superseded by the portable skill distribution in 2.0.0.
 
 - Individual README.md files for each skill with installation instructions, triggers, usage examples, and file contents overview
   - `skills/chicago-data-portal/README.md`
@@ -175,10 +189,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MIT License
 - This changelog
 
-[1.0.6]: https://github.com/MisterClean/claude-plugins/releases/tag/v1.0.6
-[1.0.5]: https://github.com/MisterClean/claude-plugins/releases/tag/v1.0.5
-[1.0.4]: https://github.com/MisterClean/claude-plugins/releases/tag/v1.0.4
-[1.0.3]: https://github.com/MisterClean/claude-plugins/releases/tag/v1.0.3
-[1.0.2]: https://github.com/MisterClean/claude-plugins/releases/tag/v1.0.2
-[1.0.1]: https://github.com/MisterClean/claude-plugins/releases/tag/v1.0.1
-[1.0.0]: https://github.com/MisterClean/claude-plugins/releases/tag/v1.0.0
+[1.0.6]: https://github.com/MisterClean/ai-plugins/releases/tag/v1.0.6
+[1.0.5]: https://github.com/MisterClean/ai-plugins/releases/tag/v1.0.5
+[1.0.4]: https://github.com/MisterClean/ai-plugins/releases/tag/v1.0.4
+[1.0.3]: https://github.com/MisterClean/ai-plugins/releases/tag/v1.0.3
+[1.0.2]: https://github.com/MisterClean/ai-plugins/releases/tag/v1.0.2
+[1.0.1]: https://github.com/MisterClean/ai-plugins/releases/tag/v1.0.1
+[1.0.0]: https://github.com/MisterClean/ai-plugins/releases/tag/v1.0.0
+
+[2.0.0]: https://github.com/MisterClean/ai-plugins

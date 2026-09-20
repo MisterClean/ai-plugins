@@ -4,7 +4,7 @@ Write authentic, human-sounding marketing copy and pro-housing advocacy messagin
 
 ## Triggers
 
-This skill activates when you ask Claude to:
+Use this skill when you ask your agent to:
 - "write marketing copy"
 - "create social media posts"
 - "write a blog post"
@@ -22,17 +22,18 @@ Or for pro-housing content:
 
 ## Installation
 
-Copy this skill folder to your project's `.claude/plugins/` directory:
-
 ```bash
-cp -r skills/housing-copywriter /path/to/your/project/.claude/plugins/
+npx skills add MisterClean/ai-plugins --skill housing-copywriter
 ```
 
-Or clone the entire repo and reference it in your Claude Code settings for global access.
+Select your supported agent and install scope when prompted. For manual installation,
+copy this entire folder into your harness's documented skills directory. See the
+[repository installation guide](../../README.md#installation) for compatibility details.
+
 
 ## Usage
 
-Once installed, just ask Claude naturally:
+Once installed, ask your agent naturally:
 
 > "Write a tweet thread about why we need more housing near transit"
 
@@ -40,7 +41,7 @@ Once installed, just ask Claude naturally:
 
 > "Write product copy for our new feature launch"
 
-Claude will automatically apply the copywriting guardrails to produce clear, authentic writing that doesn't sound AI-generated.
+A compatible agent can apply the copywriting guardrails to produce clear, authentic writing that doesn't sound AI-generated.
 
 ## Contents
 

@@ -1,7 +1,8 @@
 ---
 name: us-census-data
 description: This skill should be used when the user asks to "get Census data", "query American Community Survey", "find ACS data", "get population by state", "query Decennial Census", "find Census variables", "get median income data", "download demographic data", "Census API query", "get housing data from Census", or mentions US Census Bureau data (demographics, income, poverty, education, housing, population estimates, etc.).
-version: 1.1.0
+metadata:
+  version: "1.1.0"
 ---
 
 # US Census Data Skill

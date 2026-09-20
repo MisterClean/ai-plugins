@@ -1,7 +1,0 @@
-{
-  "name": "gridstatus-api",
-  "version": "1.2.0",
-  "description": "Query electricity grid data from US ISOs (load, LMP prices, fuel mix)",
-  "license": "MIT",
-  "skills": "./"
-}

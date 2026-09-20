@@ -1,7 +1,8 @@
 ---
 name: housing-copywriter
 description: This skill should be used when the user asks to "write marketing copy", "create social media posts", "write a blog post", "draft an email", "write product descriptions", "create brand messaging", "write ad copy", "draft a landing page", or mentions any marketing, promotional, or persuasive writing. Also use this skill when the user asks to "write about housing", "create YIMBY content", "draft zoning reform messaging", "write about parking reform", "create housing affordability content", "write to a politician about housing", or mentions pro-housing advocacy, housing policy, or parking policy communications.
-version: 1.0.0
+metadata:
+  version: "1.0.0"
 ---
 
 # Copywriting Guardrails

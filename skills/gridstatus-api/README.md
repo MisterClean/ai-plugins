@@ -8,7 +8,7 @@ Query real-time and historical electricity grid data from US Independent System 
 
 ## Triggers
 
-This skill activates when you ask Claude to:
+Use this skill when you ask your agent to:
 - "get electricity data"
 - "query grid data"
 - "get LMP prices"
@@ -25,18 +25,14 @@ Or when you mention electricity market data (load, generation, pricing, LMP, fue
 
 ## Installation
 
-Copy this skill folder to your project's `.claude/plugins/` directory:
-
 ```bash
-cp -r skills/gridstatus-api /path/to/your/project/.claude/plugins/
+npx skills add MisterClean/ai-plugins --skill gridstatus-api
 ```
 
-Or install via the plugin marketplace:
+Select your supported agent and install scope when prompted. For manual installation,
+copy this entire folder into your harness's documented skills directory. See the
+[repository installation guide](../../README.md#installation) for compatibility details.
 
-```bash
-/plugin marketplace add MisterClean/claude-plugins
-/plugin install gridstatus-api@misterclean-plugins
-```
 
 ## API Key Setup
 
@@ -50,7 +46,7 @@ The GridStatus API requires an API key:
 
 ## Usage
 
-Once installed, just ask Claude naturally:
+Once installed, ask your agent naturally:
 
 > "What's the current load in ERCOT?"
 
@@ -60,7 +56,7 @@ Once installed, just ask Claude naturally:
 
 > "Show me CAISO's fuel mix for yesterday"
 
-Claude will automatically use this skill to find the right dataset, construct the API query, and calculate energy consumption when needed.
+A compatible agent can use this skill to find the right dataset, construct the API query, and calculate energy consumption when needed.
 
 ## Supported ISOs
 

@@ -1,7 +1,8 @@
 ---
 name: gridstatus-api
 description: This skill should be used when the user asks to "get electricity data", "query grid data", "get LMP prices", "fetch load data", "get fuel mix", "query ERCOT data", "query CAISO data", "query PJM data", "get electricity prices", "analyze grid operations", "get ISO data", or mentions electricity market data (load, generation, pricing, LMP, fuel mix, ancillary services, etc.).
-version: 1.3.0
+metadata:
+  version: "1.3.0"
 ---
 
 # GridStatus API Skill

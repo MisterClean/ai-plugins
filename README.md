@@ -1,119 +1,83 @@
-# Claude Plugins
+# AI Plugins
 
-A collection of custom plugins for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that extend Claude's capabilities with domain-specific knowledge and workflows.
+Reusable skills for AI coding agents, published in the open [Agent Skills format](https://agentskills.io/specification). Each skill is a self-contained directory with a `SKILL.md` entrypoint and supporting resources.
 
-## What Are Plugins?
+The shared content is model- and harness-neutral. A compatible harness loads the instructions and supplies its own tools, permissions, and runtime. This repository distributes skills; plugin marketplaces, browser automation, hooks, and tool servers have separate harness-specific contracts. There is no claim that every harness supports the same tools or installation path.
 
-Plugins are packages of **skills** — markdown-based instruction sets that teach Claude how to handle specialized tasks. When you ask Claude something that matches a skill's triggers, it automatically loads the relevant knowledge and follows proven workflows.
+## Available skills
 
-<p align="center">
-  <img src="./assets/kung_fu.png" alt="I know kung fu" width="400">
-</p>
-
-Think of skills as **expert playbooks** — they encode domain expertise, API patterns, best practices, and common pitfalls so Claude can reliably execute complex tasks without hallucinating details.
-
-## Available Skills
-
-| Skill | Description | Triggers |
-|-------|-------------|----------|
-| [chicago-data-portal](./skills/chicago-data-portal/) | Query Chicago's open data using Socrata/SODA API | "query Chicago data", "find Chicago datasets", "Chicago crime data" |
-| [cook-county-data-portal](./skills/cook-county-data-portal/) | Query Cook County's open data (property, courts, medical examiner) | "query Cook County data", "get property assessments", "medical examiner data" |
-| [gridstatus-api](./skills/gridstatus-api/) | Query electricity grid data from US ISOs via GridStatus.io (455+ datasets, energy calculations, real-time load) | "get electricity data", "LMP prices", "ERCOT load", "fuel mix", "how much electricity" |
-| [housing-copywriter](./skills/housing-copywriter/) | Write authentic, human-sounding copy; avoid AI patterns | "write copy", "marketing copy", "pro-housing messaging", "YIMBY" |
-| [us-census-data](./skills/us-census-data/) | Query US Census Bureau API (ACS, Decennial, Population Estimates) | "get Census data", "ACS data", "population by state", "median income" |
-
-See [skills/README.md](./skills/) for the full list.
+| Skill | Purpose |
+| --- | --- |
+| [bluesky-bot](skills/bluesky-bot/SKILL.md) | Build reliable data-driven Bluesky bots, iterate on posts and maps, generate profile artwork, configure accounts, and preserve state through deployments. |
+| [chicago-data-portal](skills/chicago-data-portal/SKILL.md) | Discover and query Chicago open data using Socrata/SODA and SoQL. |
+| [cook-county-data-portal](skills/cook-county-data-portal/SKILL.md) | Query Cook County property, finance, court, and health datasets. |
+| [gridstatus-api](skills/gridstatus-api/SKILL.md) | Query electricity-grid load, pricing, generation, forecasts, and energy data. |
+| [housing-copywriter](skills/housing-copywriter/SKILL.md) | Write clear copy and pro-housing advocacy messaging. |
+| [us-census-data](skills/us-census-data/SKILL.md) | Query Census demographics, housing, income, and population data. |
 
 ## Installation
 
-### Option 1: Plugin Marketplace (Recommended)
-
-Add the marketplace and install plugins using Claude Code commands:
+The [Skills CLI](https://github.com/vercel-labs/skills) discovers the `skills/` directory and installs selected skills for supported agents:
 
 ```bash
-# Add the marketplace
-/plugin marketplace add MisterClean/claude-plugins
+# Inspect the available skills without installing.
+npx skills add MisterClean/ai-plugins --list
 
-# Install individual plugins
-/plugin install chicago-data-portal@misterclean-plugins
-/plugin install cook-county-data-portal@misterclean-plugins
-/plugin install gridstatus-api@misterclean-plugins
-/plugin install housing-copywriter@misterclean-plugins
-/plugin install us-census-data@misterclean-plugins
+# Install one skill; select your agent and scope when prompted.
+npx skills add MisterClean/ai-plugins --skill bluesky-bot
 ```
 
-### Option 2: Add to Your Project
+Node.js/npm is required for this installer, not for reading skill instructions. Review installed skill content before running bundled scripts. See the installer's current supported-agent list for per-harness paths and options.
 
-Copy the skill folder(s) you want into your project's `.claude/plugins/` directory:
+For manual installation, clone the repository and copy the **entire skill directory** into the skills directory documented by your harness:
 
 ```bash
-cp -r skills/chicago-data-portal /path/to/your/project/.claude/plugins/
+git clone https://github.com/MisterClean/ai-plugins.git
 ```
 
-### Option 3: Global Plugins (via Claude Code settings)
+For harnesses that support project-scoped `.agents/skills/`, an example is:
 
-Add this repository path to your Claude Code configuration to make plugins available across all projects.
-
-## Repository Structure
-
+```bash
+mkdir -p /path/to/project/.agents/skills
+cp -R ai-plugins/skills/bluesky-bot /path/to/project/.agents/skills/
 ```
-claude-plugins/
-├── skills/                   # All skills live here
-│   ├── README.md             # Skills index
-│   └── skill-name/           # Individual skill
-│       ├── SKILL.md          # Core instructions (loaded into context)
-│       ├── references/       # Detailed docs (loaded on demand)
-│       │   └── *.md
-│       └── examples/         # Code snippets and templates
-│           └── *.py, *.sh, etc.
-├── README.md
+
+Other harnesses use different paths. Do not copy only `SKILL.md`: references and helper scripts are part of the skill. Restart or reload skill discovery if your harness requires it. Ask the agent to use `bluesky-bot` by name; explicit invocation syntax and automatic selection depend on the harness.
+
+**Migration:** earlier versions used vendor-specific marketplace packaging. That packaging is removed in version 2.0.0. Reinstall through the skill workflow above and remove the superseded marketplace installation in your harness to avoid duplicate instructions.
+
+## Structure
+
+```text
+ai-plugins/
+├── AGENTS.md                    # Guidance for agents editing this repository
+├── skills/
+│   └── <skill-name>/
+│       ├── SKILL.md              # Required name, description, instructions
+│       ├── references/           # Detailed guidance loaded as needed
+│       ├── scripts/              # Optional executable helpers
+│       ├── assets/               # Optional output/template assets
+│       └── examples/             # Optional worked examples
+├── scripts/validate-skills.sh
+├── requirements-dev.txt         # Pinned reference validator
 ├── CONTRIBUTING.md
-├── CHANGELOG.md
 └── LICENSE
 ```
 
-- **SKILL.md**: The main file with triggers, workflows, and essential knowledge
-- **references/**: Deep-dive documentation loaded when Claude needs more detail
-- **examples/**: Ready-to-use code that Claude can adapt for the user
+Only `SKILL.md` is required inside a skill. Version information lives under its standard `metadata` mapping. Optional resources are included only when useful; there is no vendor manifest required to consume these skills.
 
-## Creating New Skills
+## Bluesky bot workflow
 
-1. Create a new folder under `skills/` with your skill name
-2. Add a `SKILL.md` with YAML frontmatter:
+Source validation → durable history → semantic events → delivery queue → generated posts/media → publication and receipt reconciliation.
 
-```yaml
----
-name: my-skill
-description: This skill should be used when the user asks to "do X", "query Y", or mentions Z.
-version: 1.0.0
----
+The [Bluesky skill](skills/bluesky-bot/SKILL.md) covers all four publication modes: new records, meaningful changes, periodic observations, and ordered collections. It includes account setup and bios, design review rules, and a reproducible avatar generator. SVG generation needs Python 3.10+; optional PNG export needs CairoSVG, Pillow, and system Cairo. The skill documents these dependencies and browser-tool fallbacks rather than assuming one host application.
 
-# My Skill
+## Validation and contributions
 
-Instructions and workflows...
+```bash
+uv run --with-requirements requirements-dev.txt sh scripts/validate-skills.sh
 ```
 
-3. Add `references/` and `examples/` as needed
-4. Test by asking Claude questions that should trigger the skill
+This uses the pinned [Agent Skills reference validator](https://github.com/agentskills/agentskills/tree/main/skills-ref). CI runs the same format checks for all skills. Behavioral quality and helper output still need task-specific review; see [CONTRIBUTING.md](CONTRIBUTING.md).
 
-### Best Practices
-
-- **Specific triggers**: Use exact phrases users would say, not vague descriptions
-- **Verify, don't assume**: Skills should tell Claude to check APIs/docs rather than guess
-- **Include examples**: Real curl commands, code snippets, and expected outputs
-- **Document pitfalls**: Common errors, edge cases, and how to handle them
-
-## Contributing
-
-PRs welcome! If you've built a skill that others might find useful:
-
-1. Fork this repo
-2. Add your skill folder under `skills/`
-3. Update `skills/README.md` with your skill
-4. Submit a PR with a description of what the skill does
-
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
-
-## License
-
-MIT
+MIT licensed. See [LICENSE](LICENSE).

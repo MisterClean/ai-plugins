@@ -1,85 +1,54 @@
-# Contributing to Claude Plugins
+# Contributing to AI Plugins
 
-Thanks for your interest in contributing! This document outlines how to add new skills or improve existing ones.
+Add focused skills or improve existing ones using the [Agent Skills specification](https://agentskills.io/specification).
 
-## Adding a New Skill
+## Add a skill
 
-### 1. Create the Skill Structure
+Create `skills/<skill-name>/SKILL.md`. Names use lowercase letters, digits, and hyphens and match the parent directory. Use valid YAML frontmatter:
 
-```bash
-mkdir -p skills/my-skill/{references,examples}
-touch skills/my-skill/SKILL.md
-```
-
-### 2. Write Your SKILL.md
-
-Every skill needs a `SKILL.md` with:
-
-**Required YAML frontmatter:**
 ```yaml
 ---
-name: my-skill
-description: This skill should be used when the user asks to "specific phrase 1", "specific phrase 2", or mentions specific-topic.
-version: 1.0.0
+name: example-skill
+description: Explain what the skill does and when an agent should use it.
+metadata:
+  version: "1.0.0"
 ---
+
+# Example Skill
+
+Instructions that help an agent perform the task well.
 ```
 
-**Key sections to include:**
-- Quick start / overview
-- Step-by-step workflow
-- Code examples (curl, API calls, etc.)
-- Common patterns and gotchas
-- Troubleshooting guide
+Required fields are `name` and `description`. Versions belong in the optional standard `metadata` mapping. Describe real capabilities and meaningful trigger conditions; do not rely on exact phrase matching. Keep detailed or conditional guidance in linked `references/` files and bundle helpers/examples only when they improve execution.
 
-### 3. Add Supporting Files
+Keep the directory self-contained and portable. Use relative resource paths, capability-based tool instructions, explicit helper dependencies, and fallbacks for unavailable tools. Do not require one assistant product, private session logs, or machine-specific paths. Skills do not grant permission to post, deploy, access accounts, or transmit data.
 
-- `references/*.md` - Detailed documentation (loaded on demand)
-- `examples/*.py, *.sh, etc.` - Working code snippets
+## Validate the result
 
-### 4. Test Your Skill
+Run the same reference-format validation as CI:
 
-1. Copy the skill to a project's `.claude/plugins/` directory
-2. Ask Claude questions that should trigger it
-3. Verify Claude follows the workflow correctly
-4. Check that examples actually work
+```bash
+uv run --with-requirements requirements-dev.txt sh scripts/validate-skills.sh
+```
 
-### 5. Submit a PR
+Without uv, use a virtual environment with Python 3.11+:
 
-1. Fork this repo
-2. Add your skill folder under `skills/`
-3. Update `skills/README.md` with your skill
-4. Update CHANGELOG.md with your additions
-5. Submit a PR with a clear description
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-dev.txt
+PATH="$PWD/.venv/bin:$PATH" sh scripts/validate-skills.sh
+```
 
-## Skill Quality Guidelines
+Then inspect relative links, execute new/changed helpers on representative fixtures, and review observable results. Format validation does not prove that instructions make good decisions. Test discovery in a compatible harness or list the catalog without installing:
 
-### Do
+```bash
+npx skills add . --list
+```
 
-- **Verify information**: If your skill references an API, test that endpoints and field names are correct
-- **Use specific triggers**: Include exact phrases users would say (e.g., "query X data", "find Y dataset")
-- **Provide working examples**: Curl commands, code snippets that actually run
-- **Document edge cases**: What happens with empty results, rate limits, auth errors?
-- **Keep it focused**: One skill = one domain/API/workflow
+Do not use production credentials or modify live accounts as part of routine validation. Keep examples free of secrets and unnecessary personal data.
 
-### Don't
+## Submit
 
-- **Guess at APIs**: Always verify endpoints, field names, and response formats
-- **Overload context**: Keep SKILL.md concise; put detailed docs in `references/`
-- **Ignore errors**: Include troubleshooting for common failure modes
-- **Hardcode secrets**: Never include API keys; show placeholder patterns instead
+Update the root skill catalog, `skills/README.md`, and `CHANGELOG.md`. Use semantic versions in each changed skill's `metadata.version`; changes to shared distribution should include migration notes. Open a pull request explaining the user-facing capability and relevant validation.
 
-## Versioning
-
-We use [Semantic Versioning](https://semver.org/):
-
-- **PATCH** (1.0.x): Bug fixes, typo corrections, minor clarifications
-- **MINOR** (1.x.0): New features, new reference files, new examples
-- **MAJOR** (x.0.0): Breaking changes to skill structure or behavior
-
-## Code of Conduct
-
-Be respectful and constructive. We're all here to make Claude more useful.
-
-## Questions?
-
-Open an issue if you're unsure about anything.
+Keep scope focused: packaging work should preserve unrelated domain guidance. When updating an API workflow, verify endpoints and field names against current authoritative sources. Be respectful and constructive in reviews.

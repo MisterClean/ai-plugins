@@ -1,7 +1,8 @@
 ---
 name: chicago-data-portal
 description: This skill should be used when the user asks to "query Chicago data", "find Chicago datasets", "get Chicago crime data", "download Chicago permits", "write a SODA query for Chicago", "search data.cityofchicago.org", or mentions Chicago city data (311, permits, licenses, inspections, crimes, etc.).
-version: 1.1.0
+metadata:
+  version: "1.1.0"
 ---
 
 # Chicago Data Portal Skill

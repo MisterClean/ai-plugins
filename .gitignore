@@ -2,4 +2,5 @@
 *.pyc
 __pycache__/
 .env
-.claude/
+.venv/
+skills-lock.json

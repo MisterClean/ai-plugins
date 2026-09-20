@@ -4,7 +4,7 @@ Query demographic, economic, housing, and population data from the US Census Bur
 
 ## Triggers
 
-This skill activates when you ask Claude to:
+Use this skill when you ask your agent to:
 - "get Census data"
 - "query American Community Survey"
 - "find ACS data"
@@ -18,13 +18,14 @@ Or when you mention US Census Bureau data (demographics, income, poverty, educat
 
 ## Installation
 
-Copy this skill folder to your project's `.claude/plugins/` directory:
-
 ```bash
-cp -r skills/us-census-data /path/to/your/project/.claude/plugins/
+npx skills add MisterClean/ai-plugins --skill us-census-data
 ```
 
-Or clone the entire repo and reference it in your Claude Code settings for global access.
+Select your supported agent and install scope when prompted. For manual installation,
+copy this entire folder into your harness's documented skills directory. See the
+[repository installation guide](../../README.md#installation) for compatibility details.
+
 
 ## API Key Setup
 
@@ -35,7 +36,7 @@ The Census API requires a key for production use:
 
 ## Usage
 
-Once installed, just ask Claude naturally:
+Once installed, ask your agent naturally:
 
 > "Get median household income by county for Illinois"
 
@@ -43,7 +44,7 @@ Once installed, just ask Claude naturally:
 
 > "Find poverty rates for all states from ACS 5-year"
 
-Claude will automatically use this skill to select the right dataset, find variable codes, and construct the API query.
+A compatible agent can use this skill to select the right dataset, find variable codes, and construct the API query.
 
 ## Contents
 

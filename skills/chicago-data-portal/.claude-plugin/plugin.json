@@ -1,7 +1,0 @@
-{
-  "name": "chicago-data-portal",
-  "version": "1.1.0",
-  "description": "Query Chicago's open data using Socrata/SODA API",
-  "license": "MIT",
-  "skills": "./"
-}

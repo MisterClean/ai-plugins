@@ -4,7 +4,7 @@ Query and download datasets from the Cook County Open Data Portal using the Socr
 
 ## Triggers
 
-This skill activates when you ask Claude to:
+Use this skill when you ask your agent to:
 - "query Cook County data"
 - "find Cook County datasets"
 - "get property assessments"
@@ -18,17 +18,18 @@ Or when you mention Cook County government data (assessor, treasurer, courts, pa
 
 ## Installation
 
-Copy this skill folder to your project's `.claude/plugins/` directory:
-
 ```bash
-cp -r skills/cook-county-data-portal /path/to/your/project/.claude/plugins/
+npx skills add MisterClean/ai-plugins --skill cook-county-data-portal
 ```
 
-Or clone the entire repo and reference it in your Claude Code settings for global access.
+Select your supported agent and install scope when prompted. For manual installation,
+copy this entire folder into your harness's documented skills directory. See the
+[repository installation guide](../../README.md#installation) for compatibility details.
+
 
 ## Usage
 
-Once installed, just ask Claude naturally:
+Once installed, ask your agent naturally:
 
 > "Get the assessed value for PIN 14-08-203-015-0000"
 
@@ -36,7 +37,7 @@ Once installed, just ask Claude naturally:
 
 > "Query property tax appeals in Northfield township"
 
-Claude will automatically use this skill to discover datasets, build SoQL queries, and retrieve the data.
+A compatible agent can use this skill to discover datasets, build SoQL queries, and retrieve the data.
 
 ## Contents
 
