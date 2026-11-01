@@ -1,0 +1,189 @@
+{
+  "validated_on": "2026-10-31",
+  "skill_version": "1.0.0",
+  "environment": {
+    "duckdb": "2.0.0",
+    "python": "3.12.15",
+    "platform": "macOS-26.5-arm64-arm-64bit",
+    "machine": "arm64",
+    "cpu_available": 10,
+    "settings": [
+      {
+        "name": "async_threads",
+        "value": "40"
+      },
+      {
+        "name": "memory_limit",
+        "value": "3.7 GiB"
+      },
+      {
+        "name": "threads",
+        "value": "8"
+      }
+    ],
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-30",
+      "kind": "bus",
+      "route": "66",
+      "window_start": "2026-10-30T08:00:00-05:00",
+      "window_end": "2026-10-30T09:00:00-05:00"
+    },
+    "coverage": [
+      {
+        "kind": "bus",
+        "first_day": "2026-10-24",
+        "last_day": "2026-10-30",
+        "days_present": 7,
+        "observations": 6766005
+      },
+      {
+        "kind": "metra",
+        "first_day": "2026-10-24",
+        "last_day": "2026-10-30",
+        "days_present": 7,
+        "observations": 666071
+      },
+      {
+        "kind": "train",
+        "first_day": "2026-10-24",
+        "last_day": "2026-10-30",
+        "days_present": 7,
+        "observations": 1937913
+      }
+    ],
+    "expected_days": 7,
+    "repeats": 3,
+    "cache": "OS cache not flushed; first execution is not a cold-disk measurement",
+    "timing_scope": "Local query, complete fetch and Python result dictionaries; downloads/build/profiles excluded"
+  },
+  "offline_test_methods": 10,
+  "offline_tests_passed": true,
+  "format_validation": "All seven repository skills passed the pinned skills-ref validator; skill-creator quick_validate also passed.",
+  "real_data_window": [
+    "2026-10-24",
+    "2026-10-30"
+  ],
+  "verified_source_files": 21,
+  "real_observations": 9369989,
+  "observations_by_kind": {
+    "bus": 6766005,
+    "train": 1937913,
+    "metra": 666071
+  },
+  "source_index": "https://data.chicagotransitalerts.app/positions/index.json",
+  "pinned_index_sha256": "471aff7de7d574f77bfc6812cc0b4708497dda4577908fd1df11aa9d2037a2b1",
+  "compressed_input_bytes": 275981524,
+  "combined_stage_validation_sorted_insert_summary_checkpoint_s": 9.18646683730185,
+  "build_timing_excludes": [
+    "download",
+    "compressed-file checksum/size verification",
+    "initial sampled-key inspection"
+  ],
+  "idempotent_rerun": {
+    "skipped_files": 21,
+    "added_rows": 0
+  },
+  "incremental_append": {
+    "skipped_files": 18,
+    "added_files": 3,
+    "added_rows": 1444265,
+    "final_observations": 9369989
+  },
+  "export": {
+    "format": "Zstandard Parquet; target row group 122880; kind/date partitioning",
+    "files": 21,
+    "bytes": 119022278
+  },
+  "query_source_combinations": 24,
+  "distinct_queries": 8,
+  "query_results_equal_across_json_parquet_native": true,
+  "additional_train_movement_source_combinations": 6,
+  "summary_equivalence": true,
+  "warm_median_ms": {
+    "coverage_daily": {
+      "json": 3074.948,
+      "native": 46.246,
+      "parquet": 46.376
+    },
+    "daily_fleet": {
+      "parquet": 44.698,
+      "native": 38.137,
+      "json": 3093.87
+    },
+    "fleet_hourly": {
+      "parquet": 216.224,
+      "json": 3219.632,
+      "native": 183.824
+    },
+    "freshness": {
+      "parquet": 114.339,
+      "json": 3124.928,
+      "native": 82.999
+    },
+    "movement_diagnostics": {
+      "native": 43.618,
+      "parquet": 69.12,
+      "json": 2671.208
+    },
+    "route_window": {
+      "parquet": 7.978,
+      "native": 3.081,
+      "json": 2634.592
+    },
+    "sampling_gaps": {
+      "json": 3630.189,
+      "parquet": 613.911,
+      "native": 491.322
+    },
+    "train_quality": {
+      "parquet": 66.408,
+      "json": 353.504,
+      "native": 62.679
+    }
+  },
+  "hourly_summary_warm_median_ms": 21.29,
+  "parquet_benchmark_build": {
+    "seconds": 1.2802371252328157,
+    "files": 21,
+    "bytes": 118357056
+  },
+  "independent_skill_exercise": {
+    "status": "Completed read-only using the entrypoint, references and bundled headway query before proposed improvements were disclosed.",
+    "task": "Route 66 weekday peak deployment and pattern-specific regularity; Yellow/Blue speed suitability; recurring planning reports.",
+    "headway_query_executed": true,
+    "observed_global_bus_missing_minutes": 39,
+    "oct30_global_bus_gap_local": [
+      "17:41",
+      "18:07"
+    ],
+    "oct30_route66_17h_recorded_expected_minutes": [
+      41,
+      60
+    ],
+    "route66_source_age_seconds": {
+      "median": 14.964,
+      "p95": 31.931
+    },
+    "yellow_estimated_coordinate_rows": 13045,
+    "yellow_observation_rows": 25126,
+    "cta_train_source_timestamps": "Absent; even exact-coordinate poll-based movement contains implausible jumps.",
+    "assessment": "Useful for retrospective feed QA, observed deployment, exploratory fixed-pattern regularity, and movement anomaly investigation. No validated train speed, passenger wait, schedule adherence or cancellation conclusion is supported."
+  },
+  "improvements_from_testing": [
+    "Declared pytz for Python timestamp fetches.",
+    "Anchored archive-date extraction to the NDJSON filename, excluding ISO dates in parent directories.",
+    "Added DST-aware all-mode daily calendar coverage and hourly expected-minute denominators.",
+    "Added executable guarded route/line movement diagnostics with adjacency and conflicting-poll exclusions.",
+    "Documented small headway samples, absent route-hours, archival versus live scope, and a recurring planning-report menu.",
+    "Added full file-comparison, DST/repeated-hour and movement regression tests to offline checks and CI."
+  ],
+  "limitations": [
+    "Timing pass ran after ingestion completed; three warm repetitions and a first execution, without OS cache flushing. Query fetch and Python result construction included.",
+    "No controlled cold-disk, remote-object, concurrent-client, production-tail-latency or multi-year test.",
+    "Daily archive observations are retrospective; mode-level missing minutes can reflect inactive service, and bus coverage gaps do not prove collection failure.",
+    "Pattern-specific headways use within-hour truncation, gate heuristics and incomplete individual-passage detection; schedules and common-stop geometry were not supplied.",
+    "No with/without-skill LLM benchmark or automatic-trigger accuracy test.",
+    "The original Linux historical performance table is preserved separately and uses some different query definitions."
+  ]
+}

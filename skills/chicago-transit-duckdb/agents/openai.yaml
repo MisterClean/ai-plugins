@@ -1,0 +1,4 @@
+interface:
+  display_name: "Chicago Transit with DuckDB"
+  short_description: "Analyze CTA and Metra positions with DuckDB 2"
+  default_prompt: "Use $chicago-transit-duckdb to analyze the last seven complete Chicago days and profile the queries."

@@ -6,6 +6,7 @@ Portable instruction packages in the [Agent Skills format](https://agentskills.i
 | --- | --- |
 | [bluesky-bot](bluesky-bot/SKILL.md) | Reliable data-driven bots, post design, procedural avatars, account setup, and state-preserving deployment. |
 | [chicago-data-portal](chicago-data-portal/SKILL.md) | Chicago open data with Socrata/SODA and SoQL. |
+| [chicago-transit-duckdb](chicago-transit-duckdb/SKILL.md) | Download, validate, and query CTA/Metra position archives with DuckDB; profile fleet, coverage, freshness, headways, and movement diagnostics. |
 | [cook-county-data-portal](cook-county-data-portal/SKILL.md) | Cook County property, finance, court, and health data. |
 | [gridstatus-api](gridstatus-api/SKILL.md) | Electricity-grid data and energy calculations. |
 | [housing-copywriter](housing-copywriter/SKILL.md) | Clear copy and pro-housing messaging. |

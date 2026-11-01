@@ -10,6 +10,7 @@ The shared content is model- and harness-neutral. A compatible harness loads the
 | --- | --- |
 | [bluesky-bot](skills/bluesky-bot/SKILL.md) | Build reliable data-driven Bluesky bots, iterate on posts and maps, generate profile artwork, configure accounts, and preserve state through deployments. |
 | [chicago-data-portal](skills/chicago-data-portal/SKILL.md) | Discover and query Chicago open data using Socrata/SODA and SoQL. |
+| [chicago-transit-duckdb](skills/chicago-transit-duckdb/SKILL.md) | Download, validate, and query CTA/Metra position archives with DuckDB; profile fleet, coverage, freshness, headways, and movement diagnostics. |
 | [cook-county-data-portal](skills/cook-county-data-portal/SKILL.md) | Query Cook County property, finance, court, and health datasets. |
 | [gridstatus-api](skills/gridstatus-api/SKILL.md) | Query electricity-grid load, pricing, generation, forecasts, and energy data. |
 | [housing-copywriter](skills/housing-copywriter/SKILL.md) | Write clear copy and pro-housing advocacy messaging. |
@@ -71,6 +72,12 @@ Only `SKILL.md` is required inside a skill. Version information lives under its 
 Source validation → durable history → semantic events → delivery queue → generated posts/media → publication and receipt reconciliation.
 
 The [Bluesky skill](skills/bluesky-bot/SKILL.md) covers all four publication modes: new records, meaningful changes, periodic observations, and ordered collections. It includes account setup and bios, design review rules, and a reproducible avatar generator. SVG generation needs Python 3.10+; optional PNG export needs CairoSVG, Pillow, and system Cairo. The skill documents these dependencies and browser-tool fallbacks rather than assuming one host application.
+
+## Chicago transit workflow
+
+The [Chicago transit skill](skills/chicago-transit-duckdb/README.md) downloads the published daily CTA bus, CTA L train, and Metra position archive, verifies checksums and schema, and builds persistent DuckDB tables, minute fleet summaries, and optional sorted Parquet. It includes source-quality checks, pattern-specific bus headways, movement diagnostics, and equivalent JSON/Parquet/native query profiling.
+
+Install with `npx skills add MisterClean/ai-plugins --skill chicago-transit-duckdb`. Helpers require Python 3.10+, DuckDB 2.x, `pytz`, `curl`, and IANA timezone data; install the Python dependencies from the skill's `scripts/requirements.txt` in an isolated environment. See its README for the end-to-end commands and tested scope. Position archives support retrospective observed deployment and regularity analysis; schedules, ridership, validated on-time performance, and live arrivals require other evidence.
 
 ## Validation and contributions
 

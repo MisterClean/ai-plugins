@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- **chicago-transit-duckdb** (1.0.0): Portable CTA bus, CTA L train, and Metra archive analysis with checksum/schema validation, incremental native DuckDB ingestion, minute fleet summaries, sorted Parquet export, and equivalent query profiling.
+- Executable fleet, all-mode calendar coverage, source freshness, train-coordinate quality, sampling, pattern-specific headway, and movement diagnostic queries, with transit interpretation safeguards.
+- Offline helper tests in CI and recorded seven-day real-data validation.
+
+### Fixed
+
+- During pre-publication testing of the new skill, declared the required `pytz` dependency and anchored JSON archive-date parsing to the filename so dated parent directories cannot change query results.
+
 ## [2.0.0] - 2026-09-20
 
 ### Added

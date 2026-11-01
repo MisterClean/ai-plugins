@@ -1,0 +1,26 @@
+{
+  "skill_name": "chicago-transit-duckdb",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Download the last seven complete Chicago days from chicagotransitalerts.app. Compare observed bus fleet deployment and CTA rail lines, then profile the queries in DuckDB 2.",
+      "expected_output": "Validated files for exactly the requested local calendar window; manifest and explicit schema; native/Parquet/JSON comparisons if requested, matching results, separate preprocessing and first/warm timings, coverage denominators and reproducible SQL. State missing publication dates rather than silently moving the window.",
+      "files": [],
+      "assertions": ["Uses America/Chicago and excludes today", "Verifies hashes and row counts", "Records actual DuckDB 2 version", "Compares equal results and does not label fresh-connection timing cold", "Does not infer cancellations or ridership from positions"]
+    },
+    {
+      "id": 2,
+      "prompt": "The Metra positions look decades old, and I want to compare train speeds on Yellow and Blue. Can you explain what to trust before we build charts?",
+      "expected_output": "Inspect timestamp units and coordinate estimation flags, retain raw values, normalize recognized Metra seconds, report source-time absence for CTA rail, inspect movement jumps and decline to label poll-based train speeds validated. Recheck current data instead of repeating historical percentages as permanent facts.",
+      "files": [],
+      "assertions": ["Checks Metra seconds versus milliseconds", "Does not assume Yellow estimated share is permanently 51.92 percent", "Excludes unknown and estimated endpoints for exact movement", "Explains missing train source timestamps"]
+    },
+    {
+      "id": 3,
+      "prompt": "Estimate Route 66 morning headways for the first week of November, including the daylight saving transition, and tell me whether passengers waited longer than scheduled.",
+      "expected_output": "Correct local day boundaries including a 25-hour day; validate archive availability; keep pattern-specific gate estimates separate; disclose coverage, sample counts and boundary truncation; require schedules and passage/arrival evidence before judging scheduled passenger waiting.",
+      "files": [],
+      "assertions": ["Does not hardcode 1440 minutes for the DST transition day", "Keeps repeated hourly instants distinct", "Does not pool pattern distance coordinates as one geographic stop", "Requires additional evidence for scheduled waiting claims"]
+    }
+  ]
+}
